@@ -14,7 +14,7 @@ import ReserveButton from './ReserveButton';
 const AppWrapper = styled.div`
   border: 1px solid #f5f5f5;
   border-radius: 2px;
-  height: 146px;
+  height: 150px;
   width: 295px;
   background: white;
   padding-left: 5px;
@@ -71,7 +71,7 @@ class App extends React.Component {
   }
 
   getAvailability() {
-    $.get(`http://localhost:3001/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
+    $.get(`http://localhost:3003/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
       this.setAvailability(results);
     });
   }
