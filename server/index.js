@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 const path = require('path');
 const express = require('express');
-const model = require('./db/reservations.model.js');
 const cors = require('cors');
+const model = require('./db/reservations.model.js');
 
 const app = express();
 
