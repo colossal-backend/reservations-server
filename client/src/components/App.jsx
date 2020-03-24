@@ -71,7 +71,7 @@ class App extends React.Component {
   }
 
   getAvailability() {
-    $.get(`/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
+    $.get(`localhost:3001/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
       this.setAvailability(results);
     });
   }
