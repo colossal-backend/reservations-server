@@ -1,9 +1,8 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  user: 'YOUR_USERNAME',
-  password: 'YOUR_PASSWORD',
-  database: 'reservations_db',
+  host: '172.17.0.2',
+  user: 'root',
 });
 
 connection.connect((err) => {
