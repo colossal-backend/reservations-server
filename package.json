@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon ./server/index.js",
     "seed": "node ./server/db/seeder.js",
-    "react-dev": "webpack -w",
+    "react-dev": "webpack",
     "test": "jest --coverage"
   },
   "dependencies": {
