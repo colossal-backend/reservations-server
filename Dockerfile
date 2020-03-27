@@ -2,7 +2,6 @@
 FROM node:8.10-alpine
 
 # Make a folder in your image where your app's source code can live
-RUN apk add bash
 RUN apk add --update git openssh
 RUN mkdir -p /src/app
 
