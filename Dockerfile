@@ -14,9 +14,10 @@ COPY . /src/app
 # Does your app have any dependencies that should be installed?
 RUN npm install
 RUN npm run react-dev
+RUN npm run seed
 
 # What port will the container talk to the outside world with once created?
-EXPOSE 5000
+EXPOSE 5050
 
 # How do you start your app?
 CMD [ "npm", "start" ]
