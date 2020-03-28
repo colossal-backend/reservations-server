@@ -1,12 +1,14 @@
 /* eslint-disable no-console */
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const model = require('./db/reservations.model.js');
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5050;
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.listen(PORT, (err) => {

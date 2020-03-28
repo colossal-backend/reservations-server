@@ -1,9 +1,10 @@
 const mysql = require('mysql');
+require('dotenv').config();
 
 const connection = mysql.createConnection({
-  user: 'YOUR_USERNAME',
-  password: 'YOUR_PASSWORD',
-  database: 'reservations_db',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
 });
 
 connection.connect((err) => {
@@ -13,13 +14,5 @@ connection.connect((err) => {
   }
   console.log(`Connected to MySQL Server as ID: ${connection.threadId}`);
 });
-
-// connection.end(err => {
-//     if (err) {
-//         console.log(`Error disconnecting from MySQL Server: ${err.stack}`);
-//     } else {
-//         console.log(`Successfully disconnected from MySQL Server`)
-//     }
-// });
 
 module.exports = connection;

@@ -14,7 +14,7 @@ import ReserveButton from './ReserveButton';
 const AppWrapper = styled.div`
   border: 1px solid #f5f5f5;
   border-radius: 2px;
-  height: 146px;
+  height: 150px;
   width: 295px;
   background: white;
   padding-left: 5px;
@@ -71,7 +71,7 @@ class App extends React.Component {
   }
 
   getAvailability() {
-    $.get(`/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
+    $.get(`http://54.215.246.132:5050/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
       this.setAvailability(results);
     });
   }
@@ -204,7 +204,7 @@ class App extends React.Component {
 
   postReservation() {
     const data = { restaurantID: this.state.restaurantID, date: this.state.selectedDay };
-    $.post('/reservations', data, () => {
+    $.post('54.215.246.132:5050/reservations', data, () => {
       console.log('Posted reservation to database');
     });
   }

@@ -64,7 +64,7 @@ const insertRecords = () => {
 
         db.queryAsync(`INSERT INTO reservations (id_restaurants, party_size, date_time)
         VALUES (${faker.random.number({ min: 1, max: 95 })}, ${faker.random.number({ min: 2, max: 10 })}, '${date}');`, // IF CHANGING NUMBER OF RESTAURANTS, CHANGE id_restaurants VALUE
-        (err) => { if (err) { console.log(err.sqlMessage); } });
+        (err) => { if (err) { /* console.log(err.sqlMessage);  */ } });
       }
     })
     .then(() => {

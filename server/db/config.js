@@ -3,7 +3,13 @@ const Promise = require('bluebird');
 
 module.exports = (db) => {
   Promise.promisifyAll(db);
-  return db.queryAsync('DROP TABLE IF EXISTS reservations, restaurants;')
+  return db.queryAsync('CREATE DATABASE IF NOT EXISTS reservations_db;')
+    .then(() => {
+      db.queryAsync('USE reservations_db;');
+    })
+    .then(() => {
+      db.queryAsync('DROP TABLE IF EXISTS reservations, restaurants;');
+    })
     .then(() => {
       db.queryAsync(`CREATE TABLE restaurants (
         id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
