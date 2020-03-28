@@ -7,7 +7,7 @@ import Day from './Day';
 
 const CalendarWrapper = styled.div`
   position: relative;
-  top: 12px;
+  bottom: 32px;
   right: 35px;
   width: 293px;
   
