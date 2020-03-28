@@ -1,21 +1,25 @@
-# What image do you want to start building on?
+# Node image
 FROM node:latest
 
-# Make a folder in your image where your app's source code can live
+# Make root directory
 RUN mkdir -p /src/app
 
-# Tell your container where your app's source code will live
+# Set working directory
 WORKDIR /src/app
 
-# What source code do you what to copy, and where to put it?
+# Copy source code to
 COPY . /src/app
 
-# Does your app have any dependencies that should be installed?
+# Install VIM to create .env file
+RUN apt-get update
+RUN apt-get install vim
+
+# Install dependencies and bundle app
 RUN npm install
 RUN npm run react-dev
 
-# What port will the container talk to the outside world with once created?
+# Set port
 EXPOSE 5050
 
-# How do you start your app?
+# Starts with...
 CMD [ "npm", "start" ]
