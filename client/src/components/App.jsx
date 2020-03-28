@@ -71,7 +71,7 @@ class App extends React.Component {
   }
 
   getAvailability() {
-    $.get(`http://localhost:5050/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
+    $.get(`54.215.246.132:5050/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
       this.setAvailability(results);
     });
   }
@@ -204,7 +204,7 @@ class App extends React.Component {
 
   postReservation() {
     const data = { restaurantID: this.state.restaurantID, date: this.state.selectedDay };
-    $.post('/reservations', data, () => {
+    $.post('54.215.246.132:5050/reservations', data, () => {
       console.log('Posted reservation to database');
     });
   }
