@@ -1,6 +1,6 @@
 # Reservations
 
-This project is the Reservations component to a restaurant review app. 
+This project is the reservations component to a restaurant review app. 
 
 ## Related Projects
 
@@ -16,14 +16,15 @@ This project is the Reservations component to a restaurant review app.
 ## Usage
 
 The app should be fairly easy to use. Go through the following steps to get it setup:
-1. run the command $ npm install to install project dependencies
-2. enter your MySQL login credentials in ./server/db/index.js
-3. run the command $ npm run seed to seed the database with dummy data
-4. run the command $ npm run react-dev to run webpack and bundle the app
-5. start the server wtih $ npm start
-6. navigate to localhost. By default the server run on process.env.port or port 3000.
-
-
+1. Pull the container from Docker hub (docker pull roryroccio/fec:server-1.0)
+2. Create a .env file in the root directory with the following schema:
+    DB_HOST=<database ip address>
+    DB_USER=<database username>
+    DB_PASS=<database password>
+    DB=<database name>
+3. Create database 'reservations_db' in MySQL server
+3. Run the command <$ npm run seed> to seed the database with dummy data
+4. Start the server wtih <$ npm start>
 
 ## Requirements
 
