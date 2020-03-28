@@ -11,8 +11,7 @@ WORKDIR /src/app
 COPY . /src/app
 
 # Install VIM to create .env file
-RUN apt-get update
-RUN apt-get install vim
+RUN apt-get update && apt-get install -y vim
 
 # Install dependencies and bundle app
 RUN npm install
