@@ -12,7 +12,7 @@ import PartySelector from './PartySelector';
 import ReserveButton from './ReserveButton';
 
 const AppWrapper = styled.div`
-  border: 1px solid #f5f5f5;
+  border: 1px solid #e2e2e2;
   border-radius: 2px;
   height: 150px;
   width: 295px;
@@ -34,6 +34,7 @@ class App extends React.Component {
       selectedDate: newDate,
       nextMonth: moment().add(1, 'months'),
       selectedPartySize: 2,
+      selectedTime: newDate.format('HH:mm a'),
     };
 
     this.getTimeOptions = this.getTimeOptions.bind(this);
@@ -203,9 +204,21 @@ class App extends React.Component {
   }
 
   postReservation() {
-    const data = { restaurantID: this.state.restaurantID, date: this.state.selectedDay };
-    $.post('54.215.246.132:5050/reservations', data, () => {
-      console.log('Posted reservation to database');
+    const formattedDate = this.state.selectedDate.format('YYYY-MM-DD');
+    const formattedTime = moment(this.state.selectedTime, 'HH:mm A').format('HH:mm:ss');
+    const fullDateTime = `${formattedDate} ${formattedTime}`;
+    const data = {
+      restaurantID: this.state.restaurantID,
+      date: fullDateTime,
+      partySize: this.state.selectedPartySize,
+    };
+    $.ajax({
+      url: 'http://54.215.246.132:5050/reservations',
+      method: 'POST',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify(data),
+      success: () => { console.log('Posted reservation to database'); },
     });
   }
 
