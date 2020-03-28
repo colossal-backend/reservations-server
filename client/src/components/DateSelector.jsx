@@ -16,8 +16,24 @@ const SelectWrapper = styled.div`
   border: 1px solid #cccccc;
   border-radius: 3px;
   background-color: white;
+`;
+
+const DateText = styled.p`
+  position: relative;
+  bottom: 31px;
+  right: 3px;
   font-size: 13.33px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+`;
+
+const Icon = styled.img`
+  position: relative;
+  right: 24px;
+  bottom: 3px;
+  vertical-align: middle;
+  height: 14px;
+  width: 14px;
+  z-index: 3;
 `;
 
 const DateSelector = ({ selectedDate, setSelectedDate, thisMonth, nextMonth, today, nextMoment}) => {
@@ -25,7 +41,8 @@ const DateSelector = ({ selectedDate, setSelectedDate, thisMonth, nextMonth, tod
 
   return (
     <SelectWrapper onClick={() => { setCalendar(!calendar); }}>
-      { `${selectedDate.format('ddd')}, ${selectedDate.format('MMM')} ${selectedDate.format('D')}` }
+      <Icon src="https://fecreservations.s3-us-west-1.amazonaws.com/calendar.png" />
+      <DateText>{ `${selectedDate.format('ddd')}, ${selectedDate.format('MMM')} ${selectedDate.format('D')}` }</DateText>
       { calendar ? <Calendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} thisMonth={thisMonth} nextMonth={nextMonth} currentDate={today} nextMoment={nextMoment}/> : null }
     </SelectWrapper>
   );

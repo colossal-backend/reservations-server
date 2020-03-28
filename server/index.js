@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const path = require('path');
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const model = require('./db/reservations.model.js');
 
@@ -9,6 +10,8 @@ const app = express();
 const PORT = process.env.PORT || 5050;
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.listen(PORT, (err) => {
@@ -32,6 +35,19 @@ app.get('/reservations/:restaurantID/:partySize', (req, res) => {
         .filter((dateTime) => dateTime.available === false);
 
       res.status(200).send(availability);
+    }
+  });
+});
+
+app.post('/reservations', (req, res) => {
+  console.log(`POST /reservations`);
+  console.log(req.body);
+  model.postReservation(req.body, (err, result) => {
+    if (err) {
+      console.log('Error: ', err);
+      res.status(400).send('Reservation failed to post');
+    } else {
+      res.status(200).send('Reservation successfully posted');
     }
   });
 });
