@@ -71,7 +71,7 @@ class App extends React.Component {
   }
 
   getAvailability() {
-    $.get(`54.215.246.132:5050/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
+    $.get(`http://54.215.246.132:5050/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
       this.setAvailability(results);
     });
   }
