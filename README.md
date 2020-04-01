@@ -69,7 +69,7 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 The request body `data` includes three properties that encode details of the rental listing.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| body | object | Takes restaurantId, partySize, and date |
+| body | `object` | Takes restaurantId, partySize, and date |
 
 #### Properties
 | Name | Type | Description |
@@ -84,12 +84,12 @@ The request body `data` includes three properties that encode details of the ren
 #### Parameters
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| id | number | id of the reservation |
+| id | `number` | id of the reservation |
 
 #### Properties
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| body | object | partySize and date of reservation |
+| body | `object` | partySize and date of reservation |
 
 The reservation's party size and date are the only modifiable properties.
 
@@ -99,4 +99,4 @@ The reservation's party size and date are the only modifiable properties.
 #### Parameters
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| id | number | id of the reservation |
+| id | `number` | id of the reservation |
