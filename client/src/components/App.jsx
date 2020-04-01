@@ -1,3 +1,6 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable max-len */
+/* eslint-disable no-console */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled from 'styled-components';
@@ -21,10 +24,10 @@ const AppWrapper = styled.div`
 `;
 
 class App extends React.Component {
-  constructor({ restaurantID, newDate }) {
-    super({ newDate });
+  constructor({ restaurantId, newDate }) {
+    super({ restaurantId, newDate });
     this.state = {
-      restaurantID,
+      restaurantId,
       timeOptions: [],
       days: [],
       nextDays: [],
@@ -72,7 +75,7 @@ class App extends React.Component {
   }
 
   getAvailability() {
-    $.get(`http://54.215.246.132:5050/reservations/${this.state.restaurantID}/${this.state.selectedPartySize}`, (results) => {
+    $.get(`http://localhost:5050/reservations/${this.state.restaurantId}/${this.state.selectedPartySize}`, (results) => {
       this.setAvailability(results);
     });
   }
@@ -139,7 +142,7 @@ class App extends React.Component {
     const zeroPad = (num) => `0${num.toString()}`;
     /*
     The Day object track if a given day is selectable (disabled), is prior to the current day or over a month away (otherMonth)
-    a moment object associated with the day (date), an array of unavailable times/moment objects (unavailable), and 
+    a moment object associated with the day (date), an array of unavailable times/moment objects (unavailable), and
     */
     const Day = (disabled, otherMonth, date, unavailable, selected, year, month) => ({
       disabled, otherMonth, date, unavailable, selected, year, month,
@@ -208,17 +211,22 @@ class App extends React.Component {
     const formattedTime = moment(this.state.selectedTime, 'HH:mm A').format('HH:mm:ss');
     const fullDateTime = `${formattedDate} ${formattedTime}`;
     const data = {
-      restaurantID: this.state.restaurantID,
+      restaurantId: this.state.restaurantId,
       date: fullDateTime,
       partySize: this.state.selectedPartySize,
     };
     $.ajax({
-      url: 'http://54.215.246.132:5050/reservations',
+      url: 'http://localhost:5050/reservations',
       method: 'POST',
       contentType: 'application/json',
       dataType: 'json',
       data: JSON.stringify(data),
-      success: () => { console.log('Posted reservation to database'); },
+      success: () => {
+        console.log('Posted reservation to database');
+      },
+      error: (error) => {
+        console.log(error, 'error posting to db');
+      },
     });
   }
 
@@ -226,7 +234,7 @@ class App extends React.Component {
     return (
       <AppWrapper>
         <Title />
-        <DateSelector selectedDate={this.state.selectedDate} setSelectedDate={this.setSelectedDate} thisMonth={this.state.days} nextMonth={this.state.nextDays} today={this.state.today} nextMoment={this.state.nextMonth}/>
+        <DateSelector selectedDate={this.state.selectedDate} setSelectedDate={this.setSelectedDate} thisMonth={this.state.days} nextMonth={this.state.nextDays} today={this.state.today} nextMoment={this.state.nextMonth} />
         <TimeSelector timeOptions={this.state.timeOptions} setSelectedTime={this.setSelectedTime} />
         <PartySelector setSelectedPartySize={this.setSelectedPartySize} />
         <ReserveButton postReservation={this.postReservation} />
@@ -238,12 +246,12 @@ class App extends React.Component {
 App.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   newDate: PropTypes.object, /* Should be a Date object */
-  restaurantID: PropTypes.number,
+  restaurantId: PropTypes.number,
 };
 
 App.defaultProps = {
   newDate: moment(),
-  restaurantID: 1,
+  restaurantId: 1,
 };
 
 export default App;

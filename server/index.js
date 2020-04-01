@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const model = require('./db/reservations.model.js');
+const Controller = require('./controllers');
 
 const app = express();
 
@@ -22,32 +22,14 @@ app.listen(PORT, (err) => {
   }
 });
 
-app.get('/reservations/:restaurantID/:partySize', (req, res) => {
-  console.log(`GET /reservations/${req.params.restaurantID}/${req.params.partySize}`);
-  model.getReservations(req.params.restaurantID, (err, results) => {
-    if (err) {
-      console.log('Error: ', err);
-      res.status(400).send('Data could not be retrieved');
-    } else {
-      // FIND UNAVAILABLE DATE-TIMES
-      // eslint-disable-next-line max-len
-      const availability = results.map((dateTime) => ({ ...dateTime, available: dateTime.capacity - dateTime.occupied - req.params.partySize > 0 }))
-        .filter((dateTime) => dateTime.available === false);
+// Get Reservation
+app.get('/reservations/:restaurantId/:partySize', Controller.get);
 
-      res.status(200).send(availability);
-    }
-  });
-});
+// Save Reservation
+app.post('/reservations', Controller.post);
 
-app.post('/reservations', (req, res) => {
-  console.log(`POST /reservations`);
-  console.log(req.body);
-  model.postReservation(req.body, (err, result) => {
-    if (err) {
-      console.log('Error: ', err);
-      res.status(400).send('Reservation failed to post');
-    } else {
-      res.status(200).send('Reservation successfully posted');
-    }
-  });
-});
+// Update Reservation
+app.patch('/reservations/:id/update', Controller.update);
+
+// Delete Reservation
+app.delete('/reservations/:id/delete', Controller.destroy);

@@ -9,6 +9,8 @@
   },
   "scripts": {
     "start": "node ./server/index.js",
+    "watch": "nodemon ./server/index.js",
+    "watch:react": "webpack -d --watch",
     "seed": "node ./server/db/seeder.js",
     "react-dev": "webpack",
     "test": "jest --coverage"

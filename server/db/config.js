@@ -3,9 +3,9 @@ const Promise = require('bluebird');
 
 module.exports = (db) => {
   Promise.promisifyAll(db);
-  return db.queryAsync('CREATE DATABASE IF NOT EXISTS reservations_db;')
+  return db.queryAsync('CREATE DATABASE IF NOT EXISTS reservations;')
     .then(() => {
-      db.queryAsync('USE reservations_db;');
+      db.queryAsync('USE reservations;');
     })
     .then(() => {
       db.queryAsync('DROP TABLE IF EXISTS reservations, restaurants;');

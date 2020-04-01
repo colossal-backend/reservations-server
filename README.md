@@ -1,42 +1,102 @@
-# Reservations
 
-This project is the reservations component to a restaurant review app. 
+# Reservations System Design
+
+System design of reservations based on Yelp
+
 
 ## Related Projects
 
-  - https://github.com/Denali-Outdoors/image-carousel-server
-  - https://github.com/Denali-Outdoors/reviews-server
+- https://github.com/colossal-backend/image-carousel-server
+
+- https://github.com/colossal-backend/reviews-server
+  
 
 ## Table of Contents
 
+  
+
 1. [Usage](#Usage)
 2. [Requirements](#requirements)
-3. [Development](#development)
+3. [API](#API)
+
+  
 
 ## Usage
 
-The app should be fairly easy to use. Go through the following steps to get it setup:
-1. Pull the container from Docker hub (docker pull roryroccio/fec:server-1.0)
-2. Create a .env file in the root directory with the following schema:
-    DB_HOST=<database ip address>
-    DB_USER=<database username>
-    DB_PASS=<database password>
-    DB=<database name>
-3. Create database 'reservations_db' in MySQL server
-3. Run the command <$ npm run seed> to seed the database with dummy data
-4. Start the server wtih <$ npm start>
 
+1. Create a .env file in the root directory with the following schema:
+
+	DB_HOST=database ip/localhost
+
+	DB_USER=database username
+
+	DB_PASS=database password
+
+	DB=database name
+
+2. Create database 'reservations' in MySQL server
+
+3. `npm install`
+
+4. `npm run seed` to seed the database with dummy data
+
+6. Start the server wtih `npm start`
+
+ 
 ## Requirements
+
+  
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
-- Node 6.13.0
+ 
+- Node 8+
+
 - MySQL
 
-## Development
+  
 
-### Installing Dependencies
+## API
+### Get Reservation
+`GET /reservations/:restaurantId/:partySize`
+#### Response
+`reservation` JSON object
 
-From within the root directory:
+### Create Reservation
+`POST /reservations`
 
-npm install
+#### Parameters
+The request body `data` includes three properties that encode details of the rental listing.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| body | object | Takes restaurantId, partySize, and date |
+
+#### Properties
+| Name | Type | Description |
+| --- | --- | --- |
+| `restaurantId` | `number` | id of selected restaurant |
+| `partySize`  | `number` | size of the party |
+| `date` | `string` | date of reservation |
+
+### Update Reservation
+`PATCH /reservations/:id/update`
+
+#### Parameters
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| id | number | id of the reservation |
+
+#### Properties
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| body | object | partySize and date of reservation |
+
+The reservation's party size and date are the only modifiable properties.
+
+### Delete Reservation
+`DELETE /reservations/:id/delete`
+
+#### Parameters
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| id | number | id of the reservation |
