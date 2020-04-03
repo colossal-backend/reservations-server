@@ -57,29 +57,37 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
   
 
 ## API
-### Get Reservation
-`GET /reservations/:restaurantId/:partySize`
-#### Response
-`reservation` JSON object
-
-### Create Reservation
-`POST /reservations`
+### Find Reservation
+`GET /reservations/:restaurant`
 
 #### Parameters
-The request body `data` includes three properties that encode details of the rental listing.
+Requires query parameters of party and date
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| body | `object` | Takes restaurantId, partySize, and date |
+| party | `number` | size of group |
+| date | `date` | date and time of reservation desired |
+
+#### Response
+`reservation` options as JSON objects
+
+### Create Reservation
+`POST /reservations/:restaurant`
+
+#### Parameters
+The `payload` includes three properties that encode details of the rental listing.
+| Type | Description |
+| ---- | ----------- |
+| `object` | Takes restaurant, party, and date |
 
 #### Properties
 | Name | Type | Description |
 | --- | --- | --- |
-| `restaurantId` | `number` | id of selected restaurant |
-| `partySize`  | `number` | size of the party |
+| `restaurant` | `number` | id of selected restaurant |
+| `party`  | `number` | size of the party |
 | `date` | `string` | date of reservation |
 
 ### Update Reservation
-`PATCH /reservations/:id/update`
+`PATCH /reservations/:id`
 
 #### Parameters
 | Name | Type | Description |
@@ -89,14 +97,15 @@ The request body `data` includes three properties that encode details of the ren
 #### Properties
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| body | `object` | partySize and date of reservation |
+| body | `object` | party and date of reservation |
 
 The reservation's party size and date are the only modifiable properties.
 
 ### Delete Reservation
-`DELETE /reservations/:id/delete`
+`DELETE /reservations/:restaurant/:id`
 
 #### Parameters
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | id | `number` | id of the reservation |
+| restaurant | `number` | id of the restaurant |
