@@ -7,12 +7,12 @@ const cliProgress = require('cli-progress');
 
 const generator = require('./reservationData');
 
-const reservationCount = 100;
+const reservationCount = 1000;
 
 const reservationsCreator = createCsvWriter({
   path: './reservations.csv',
   header: [
-    { id: 'restaurant_id', title: 'RESTAURANT_ID' },
+    { id: 'restaurantId', title: 'RESTAURANT ID' },
     { id: 'party', title: 'PARTY' },
     { id: 'date', title: 'DATE' },
   ],
@@ -26,7 +26,7 @@ const generateReservations = () => {
   const reservations = [];
   for (let i = 0; i < reservationCount; i++) {
     const reservationsObject = {};
-    reservationsObject.restaurant_id = faker.random.number({ min: 1, max: 95 });
+    reservationsObject.restaurantId = faker.random.number({ min: 1, max: 95 });
     reservationsObject.party = faker.random.number({ min: 2, max: 10 });
     const randomMonth = generator.getRandomMonth();
     const randomDay = generator.getRandomDay();
@@ -35,7 +35,6 @@ const generateReservations = () => {
     const date = `2020-${randomMonth}-${randomDay} ${randomHour}:${randomMinutes}:00`;
     reservationsObject.date = date;
     reservations.push(reservationsObject);
-    bar.increment();
   }
   return reservations;
 };
@@ -43,11 +42,12 @@ const generateReservations = () => {
 let batches = 0;
 
 const addReservations = () => {
-  if (batches < 1000000) {
+  if (batches < 100000) {
     batches += 1;
     const data = generateReservations();
     reservationsCreator.writeRecords(data)
       .then(() => {
+        bar.increment();
         addReservations();
       });
   } else {
@@ -60,5 +60,5 @@ const addReservations = () => {
 
 console.time('Generation Time');
 
-bar.start(100000000, 0);
+bar.start(100000, 0);
 addReservations();

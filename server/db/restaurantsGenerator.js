@@ -5,7 +5,7 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const faker = require('faker');
 const cliProgress = require('cli-progress');
 
-const restaurantCount = 100;
+const restaurantCount = 1000;
 
 const restaurantsCreator = createCsvWriter({
   path: './restaurants.csv',
@@ -25,7 +25,6 @@ const generateRestaurants = () => {
     restaurantsObject.name = `${faker.company.companyName()}`;
     restaurantsObject.max_seats = faker.random.number({ min: 10, max: 30 });
     restaurants.push(restaurantsObject);
-    bar.increment();
   }
   return restaurants;
 };
@@ -38,6 +37,7 @@ const addRestaurants = () => {
     const data = generateRestaurants();
     restaurantsCreator.writeRecords(data)
       .then(() => {
+        bar.increment();
         addRestaurants();
       });
   } else {
@@ -50,5 +50,5 @@ const addRestaurants = () => {
 
 console.time('Generation Time');
 
-bar.start(1000000, 0);
+bar.start(10000, 0);
 addRestaurants();

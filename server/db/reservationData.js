@@ -6,9 +6,11 @@ const faker = require('faker');
 /*
 RANDOM DATE GENERATION UTILITIES
 */
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
 const getRandomMonth = () => {
   // first, generate random dates in MySQL friendly format ('yyyy-mm-dd hh:mm:ss')
-  const randomMonth = faker.random.number({ min: 3, max: 4 }).toString();
+  const randomMonth = randomInt(3, 6).toString();
   if (randomMonth.length === 1) {
     return `0${randomMonth}`; // ENSURES THAT NO SINGLE-DIGIT NUMBERS ARE PASSED TO DATE STRING (MYSQL ERRORS)
   }
@@ -16,7 +18,7 @@ const getRandomMonth = () => {
 };
 
 const getRandomDay = () => {
-  const randomDay = faker.random.number({ min: 1, max: 30 }).toString();
+  const randomDay = randomInt(1, 30).toString();
   if (randomDay.length === 1) {
     return `0${randomDay}`; // ENSURES THAT NO SINGLE-DIGIT NUMBERS ARE PASSED TO DATE STRING (MYSQL ERRORS)
   }
@@ -24,7 +26,7 @@ const getRandomDay = () => {
 };
 
 const getRandomHour = () => {
-  const randomHour = faker.random.number({ min: 9, max: 22 }).toString();
+  const randomHour = randomInt(9, 22).toString();
   if (randomHour.length === 1) {
     return `0${randomHour}`; // ENSURES THAT NO SINGLE-DIGIT NUMBERS ARE PASSED TO DATE STRING (MYSQL ERRORS)
   }
