@@ -24,10 +24,10 @@ const AppWrapper = styled.div`
 `;
 
 class App extends React.Component {
-  constructor({ restaurantId, newDate }) {
-    super({ restaurantId, newDate });
+  constructor({ newDate }) {
+    super({ newDate });
     this.state = {
-      restaurantId,
+      restaurantId: 0,
       timeOptions: [],
       days: [],
       nextDays: [],
@@ -53,6 +53,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+    this.setState({
+      restaurantId: randomInt(1, 10000000),
+    });
     this.setTimeOptions(this.state.selectedDate.format('h:mm a'));
     this.getAvailability();
   }

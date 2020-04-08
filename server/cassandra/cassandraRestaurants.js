@@ -4,7 +4,7 @@
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const cliProgress = require('cli-progress');
 const faker = require('faker');
-const generator = require('./reservationData');
+const generator = require('../db/reservationData');
 
 const restaurantCount = 1000;
 

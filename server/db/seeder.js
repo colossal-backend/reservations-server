@@ -7,7 +7,7 @@ const configure = require('./config');
 const reservationCount = 2000; // WILL DETERMINE THE NUMBER OF RESERVATIONS TO ADD
 const restaurantCount = 100; // WILL DETERMINE THE NUMBER OF RESTAURANT RECORDS TO ADD
 // IF CHANGING NUMBER OF RESTAURANTS,
-// CHANGE possible values for 'reservations.id_restaurants' VALUE WHERE RESERVATIONS ARE INSERTED
+// CHANGE possible values for 'reservations.restaurantId' VALUE WHERE RESERVATIONS ARE INSERTED
 
 
 /*
@@ -62,8 +62,8 @@ const insertRecords = () => {
         const randomMinutes = getRandomMinutes();
         const date = `2020-${randomMonth}-${randomDay} ${randomHour}:${randomMinutes}:00`;
 
-        db.queryAsync(`INSERT INTO reservations (id_restaurants, party_size, date_time)
-        VALUES (${faker.random.number({ min: 1, max: 95 })}, ${faker.random.number({ min: 2, max: 10 })}, '${date}');`, // IF CHANGING NUMBER OF RESTAURANTS, CHANGE id_restaurants VALUE
+        db.queryAsync(`INSERT INTO reservations (restaurantId, party, date)
+        VALUES (${faker.random.number({ min: 1, max: 95 })}, ${faker.random.number({ min: 2, max: 10 })}, '${date}');`, // IF CHANGING NUMBER OF RESTAURANTS, CHANGE restaurantId VALUE
         (err) => { if (err) { /* console.log(err.sqlMessage);  */ } });
       }
     })

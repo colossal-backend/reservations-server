@@ -102,7 +102,7 @@ The `payload` includes three properties that encode details of the rental listin
 The reservation's party size and date are the only modifiable properties.
 
 ### Delete Reservation
-`DELETE /reservations/:restaurant/:id`
+`DELETE /reservations/:id`
 
 #### Parameters
 | Name | Type | Description |

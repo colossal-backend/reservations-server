@@ -19,10 +19,10 @@ module.exports = (db) => {
     .then(() => {
       db.queryAsync(`CREATE TABLE reservations (
         id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        id_restaurants INTEGER,
-        party_size INTEGER,
-        date_time DATETIME,
-        FOREIGN KEY (id_restaurants) REFERENCES restaurants (id));`);
+        restaurantId INTEGER,
+        party INTEGER,
+        date DATETIME,
+        FOREIGN KEY (restaurantId) REFERENCES restaurants (id));`);
     })
     .then(() => {
       console.log('Successfully configured database');

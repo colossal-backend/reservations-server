@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Controller = require('./controllers');
+// const CassandraController = require('./cassandra/CassandraController');
 
 const app = express();
 
@@ -33,3 +34,6 @@ app.patch('/reservations/:id/update', Controller.update);
 
 // Delete Reservation
 app.delete('/reservations/:id/delete', Controller.destroy);
+
+// // Cassandra
+// app.get('/reservations/:restaurantId/:partySize', CassandraController.get);

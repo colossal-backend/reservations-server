@@ -34,7 +34,9 @@ const getRandomHour = () => {
 };
 
 const getRandomMinutes = () => (faker.random.arrayElement(['00', '30']));
+const getRandomSeconds = () => (faker.random.arrayElement(['00', '60']));
+
 
 module.exports = {
-  getRandomDay, getRandomHour, getRandomMinutes, getRandomMonth,
+  getRandomDay, getRandomHour, getRandomMinutes, getRandomMonth, getRandomSeconds,
 };

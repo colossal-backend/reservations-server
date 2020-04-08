@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
-const faker = require('faker');
+// const faker = require('faker');
 const cliProgress = require('cli-progress');
 
 const generator = require('./reservationData');
@@ -22,17 +22,25 @@ const reservationsCreator = createCsvWriter({
 // create new progress bar
 const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
 const generateReservations = () => {
   const reservations = [];
   for (let i = 0; i < reservationCount; i++) {
     const reservationsObject = {};
-    reservationsObject.restaurantId = faker.random.number({ min: 1, max: 95 });
-    reservationsObject.party = faker.random.number({ min: 2, max: 10 });
+    reservationsObject.restaurantId = randomInt(1, 10000000);
+    reservationsObject.party = randomInt(2, 10);
     const randomMonth = generator.getRandomMonth();
     const randomDay = generator.getRandomDay();
     const randomHour = generator.getRandomHour();
     const randomMinutes = generator.getRandomMinutes();
-    const date = `2020-${randomMonth}-${randomDay} ${randomHour}:${randomMinutes}:00`;
+    let randomSeconds = randomInt(0, 59);
+    if (randomSeconds === 0) {
+      randomSeconds = `${randomSeconds}${0}`;
+    } else if (randomSeconds >= 1 && randomSeconds <= 9) {
+      randomSeconds = `${0}${randomSeconds}`;
+    }
+    const date = `2020-${randomMonth}-${randomDay} ${randomHour}:${randomMinutes}:${randomSeconds}`;
     reservationsObject.date = date;
     reservations.push(reservationsObject);
   }
