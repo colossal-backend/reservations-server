@@ -5,7 +5,7 @@ const Model = require('./models');
 const get = (req, res) => {
   const { restaurantId, partySize } = req.params;
   // const { partySize } = req.params;
-  console.log(`GET /reservations/${restaurantId}/${partySize}`);
+  // console.log(`GET /reservations/${restaurantId}/${partySize}`);
   Model.getReservation(restaurantId, (err, reservations) => {
     if (err) {
       console.log(err, 'error getting reservations');
@@ -18,7 +18,7 @@ const get = (req, res) => {
 };
 
 const post = (req, res) => {
-  console.log('POST /reservations');
+  // console.log('POST /reservations');
   const { restaurantId, partySize, date } = req.body;
   Model.postReservation(restaurantId, partySize, date, (err, reservation) => {
     if (err) {

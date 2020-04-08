@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+require('newrelic');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -8,7 +9,7 @@ const Controller = require('./controllers');
 
 const app = express();
 
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -29,11 +30,11 @@ app.get('/reservations/:restaurantId/:partySize', Controller.get);
 // Save Reservation
 app.post('/reservations', Controller.post);
 
-// Update Reservation
-app.patch('/reservations/:id/update', Controller.update);
+// // Update Reservation
+// app.patch('/reservations/:id/update', Controller.update);
 
-// Delete Reservation
-app.delete('/reservations/:id/delete', Controller.destroy);
+// // Delete Reservation
+// app.delete('/reservations/:id/delete', Controller.destroy);
 
 // // Cassandra
 // app.get('/reservations/:restaurantId/:partySize', CassandraController.get);
