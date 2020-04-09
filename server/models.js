@@ -1,17 +1,17 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 const db = require('./db/index');
 
-const getReservation = (restaurantId, callback) => {
-  db.query(`SELECT restaurants.id as restaurant, SUM(party) AS occupied, restaurants.max_seats AS capacity, date 
-    FROM reservations INNER JOIN restaurants ON (restaurants.id = reservations.restaurantId) 
-    WHERE restaurantId = ${restaurantId} GROUP BY restaurant, date;`,
-  (err, results) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, results.rows);
-    }
-  });
+const getAvailableReservations = (restaurantId, callback) => {
+  const sql = `SELECT restaurants.id as restaurant, SUM(party) AS occupied, restaurants.max_seats AS capacity, date
+  FROM reservations INNER JOIN restaurants ON (restaurants.id = reservations.restaurantId)
+  WHERE restaurantId = $1 GROUP BY restaurant, date;`;
+  db.query(sql, [restaurantId], callback);
+};
+
+const getRestaurantReservations = (restaurantId, callback) => {
+  const sql = 'SELECT * FROM reservations WHERE restaurantId = $1';
+  db.query(sql, [restaurantId], callback);
 };
 
 const postReservation = (restaurantId, partySize, date, callback) => {
@@ -48,5 +48,5 @@ const deleteReservation = (reservationId, callback) => {
 };
 
 module.exports = {
-  getReservation, postReservation, updateReservation, deleteReservation,
+  getAvailableReservations, postReservation, updateReservation, deleteReservation, getRestaurantReservations,
 };

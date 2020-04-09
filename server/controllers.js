@@ -2,17 +2,27 @@
 /* eslint-disable no-console */
 const Model = require('./models');
 
-const get = (req, res) => {
+const getAvailable = (req, res) => {
   const { restaurantId, partySize } = req.params;
-  // const { partySize } = req.params;
   // console.log(`GET /reservations/${restaurantId}/${partySize}`);
-  Model.getReservation(restaurantId, (err, reservations) => {
+  Model.getAvailableReservations(restaurantId, (err, reservations) => {
     if (err) {
       console.log(err, 'error getting reservations');
     } else {
-      const availability = reservations.map((dateTime) => ({ ...dateTime, available: dateTime.capacity - dateTime.occupied - partySize > 0 }))
+      const availability = reservations.rows.map((dateTime) => ({ ...dateTime, available: dateTime.capacity - dateTime.occupied - partySize > 0 }))
         .filter((dateTime) => dateTime.available === false);
       res.send(availability);
+    }
+  });
+};
+
+const getReservations = (req, res) => {
+  const { restaurantId } = req.params;
+  Model.getRestaurantReservations(restaurantId, (err, reservation) => {
+    if (err) {
+      console.log(err, 'error getting these reservations');
+    } else {
+      res.send(reservation);
     }
   });
 };
@@ -55,5 +65,5 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  get, post, update, destroy,
+  getAvailable, post, update, destroy, getReservations,
 };

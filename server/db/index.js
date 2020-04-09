@@ -21,12 +21,13 @@
 // module.exports = connection;
 
 const pg = require('pg');
+require('dotenv').config();
 
 const connection = new pg.Pool({
-  host: 'localhost',
-  user: 'tjcasner',
-  database: 'reservations',
-  port: 5432,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB_PORT,
 });
 
 connection.connect((err) => {

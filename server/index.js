@@ -4,37 +4,82 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
+// const cluster = require('cluster');
+// const numCPUs = require('os').cpus().length;
 const Controller = require('./controllers');
-// const CassandraController = require('./cassandra/CassandraController');
 
 const app = express();
-
-const PORT = process.env.PORT || 8000;
+const port = process.env.PORT || 5050;
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.listen(PORT, (err) => {
+// if (cluster.isMaster) {
+//   console.log(`Master ${process.pid} is running`);
+
+//   // Fork workers from CPUs
+//   for (let i = 0; i < numCPUs; i += 1) {
+//     cluster.fork();
+//   }
+
+//   // Check worker status
+//   cluster.on('exit', (worker, code, signal) => {
+//     console.log(`worker ${worker.process.pid} died`);
+//   });
+// } else {
+//   // Workers can share any TCP connection
+//   // Express initialiization
+//   console.log(`Worker ${process.pid} started`);
+
+//   // Get Available Reservations
+//   app.get('/reservations/:restaurantId/:partySize', Controller.getAvailable);
+
+//   // Get all restaurant reservations
+//   app.get('/reservations/:restaurantId', Controller.getReservations);
+
+//   // Save Reservation
+//   app.post('/reservations', Controller.post);
+
+//   // // Update Reservation
+//   app.patch('/reservations/:id/update', Controller.update);
+
+//   // // Delete Reservation
+//   app.delete('/reservations/:id/delete', Controller.destroy);
+
+
+//   app.listen(port, (err) => {
+//     if (err) {
+//       console.log(`Failed to start server: ${err}`);
+//     } else {
+//       console.log(`Listening on ${port}`);
+//     }
+//   });
+// }
+
+
+app.listen(port, (err) => {
   if (err) {
     console.log(`Failed to start server: ${err}`);
   } else {
-    console.log(`Listening on ${PORT}`);
+    console.log(`Listening on ${port}`);
   }
 });
 
-// Get Reservation
-app.get('/reservations/:restaurantId/:partySize', Controller.get);
+
+// Get Available Reservations
+app.get('/reservations/:restaurantId/:partySize', Controller.getAvailable);
+
+// Get all restaurant reservations
+app.get('/reservations/:restaurantId', Controller.getReservations);
 
 // Save Reservation
 app.post('/reservations', Controller.post);
 
 // // Update Reservation
-// app.patch('/reservations/:id/update', Controller.update);
+app.patch('/reservations/:id/update', Controller.update);
 
 // // Delete Reservation
-// app.delete('/reservations/:id/delete', Controller.destroy);
-
-// // Cassandra
-// app.get('/reservations/:restaurantId/:partySize', CassandraController.get);
+app.delete('/reservations/:id/delete', Controller.destroy);
