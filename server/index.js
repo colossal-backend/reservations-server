@@ -68,6 +68,10 @@ app.listen(port, (err) => {
   }
 });
 
+// Loader.io
+app.get('/loaderio-e64828b65028448238cb43dfadf96936', (req, res) => {
+  res.sendFile(`${__dirname}/loaderio-e64828b65028448238cb43dfadf96936.txt`);
+});
 
 // Get Available Reservations
 app.get('/reservations/:restaurantId/:partySize', Controller.getAvailable);

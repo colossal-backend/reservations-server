@@ -13,7 +13,21 @@ CREATE TABLE reservations (
 	FOREIGN KEY (restaurantId) REFERENCES restaurants (id)
 );
 
-COPY reservations(restaurantid, party, date) FROM '/Users/tjcasner/reservations-fix.csv' DELIMITER ',' CSV HEADER;
+CREATE TABLE restaurants (
+	id INT,
+	name TEXT,
+	max_seats INT,
+	PRIMARY KEY (id)
+)
+
+COPY reservations(restaurantid, party, date) FROM 'reservations.csv' DELIMITER ',' CSV HEADER;
+
+\COPY restaurants(name, max_seats) FROM 'ec2-user@ec2-3-22-164-4.us-east-2.compute.amazonaws.com:~/restaurants.csv' DELIMITER ',' CSV HEADER;
+
+\COPY restaurants(name, max_seats) FROM ''reservations.csv'' DELIMITER ',' CSV HEADER;
+\COPY restaurants(name, max_seats) FROM 'ec2-user@ip-172-31-30-25:restaurants.csv' DELIMITER ',' CSV HEADER;
+COPY restaurants(name, max_seats) FROM 'restaurants.csv' DELIMITER ',' CSV HEADER;
+
 
 
 SELECT * FROM reservations WHERE restaurantId = 9512355;

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable arrow-body-style */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
@@ -13,6 +14,8 @@ import DateSelector from './DateSelector';
 import TimeSelector from './TimeSelector';
 import PartySelector from './PartySelector';
 import ReserveButton from './ReserveButton';
+// require('dotenv').config();
+
 
 const AppWrapper = styled.div`
   border: 1px solid #e2e2e2;
@@ -79,7 +82,7 @@ class App extends React.Component {
   }
 
   getAvailability() {
-    $.get(`http://localhost:5050/reservations/${this.state.restaurantId}/${this.state.selectedPartySize}`, (results) => {
+    $.get(`/reservations/${this.state.restaurantId}/${this.state.selectedPartySize}`, (results) => {
       this.setAvailability(results);
     });
   }
@@ -220,7 +223,7 @@ class App extends React.Component {
       partySize: this.state.selectedPartySize,
     };
     $.ajax({
-      url: 'http://localhost:5050/reservations',
+      url: '/reservations',
       method: 'POST',
       contentType: 'application/json',
       dataType: 'json',
