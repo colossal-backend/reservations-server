@@ -1,8 +1,0 @@
-- for patch and delete routes, do not include verbs such as update, delete in route endpoint
-
-- could include crud operations for restaurant
-
-- all reservations are associated with a restaurant, so include restaurant in the route
-    - since reservations belong to restaurants, include parent information in route
-
-- for things like party size, use query parameters to make filtering simpler

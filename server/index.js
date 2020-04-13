@@ -35,8 +35,8 @@ if (cluster.isMaster) {
   console.log(`Worker ${process.pid} started`);
 
   // Loader.io
-  app.get('/loaderio-e64828b65028448238cb43dfadf96936', (req, res) => {
-    res.sendFile(`${__dirname}/loaderio-e64828b65028448238cb43dfadf96936.txt`);
+  app.get('/loaderio-0ca8e73f7bfd0921d5756514dcde4370', (req, res) => {
+    res.sendFile(`${__dirname}/loaderio-0ca8e73f7bfd0921d5756514dcde4370.txt`);
   });
 
   // Get Available Reservations

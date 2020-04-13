@@ -15,7 +15,7 @@
     "generate-reservations": "node ./server/db/reservationsGenerator.js",
     "generate-restaurants": "node ./server/db/restaurantsGenerator.js",
     "generate-cassandra": "node ./server/cassandra/cassandraRestaurants.js",
-    "react-dev": "webpack",
+    "react-dev": "webpack -p",
     "test": "jest --coverage"
   },
   "dependencies": {
