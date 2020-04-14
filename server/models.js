@@ -10,7 +10,7 @@ const getAvailableReservations = (restaurantId, callback) => {
 };
 
 const getRestaurantReservations = (restaurantId, callback) => {
-  const sql = 'SELECT * FROM reservations WHERE restaurantId = $1';
+  const sql = 'SELECT restaurantId, party, date FROM reservations WHERE restaurantId = $1';
   db.query(sql, [restaurantId], callback);
 };
 

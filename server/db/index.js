@@ -6,7 +6,6 @@ const connection = new pg.Pool({
   host: '3.22.112.122',
   user: 'postgres',
   database: 'reservationsdb',
-  max: 30,
   port: 5432,
 });
 
