@@ -6,17 +6,17 @@ import { check, sleep } from 'k6';
 
 export const options = {
   stages: [
-    { duration: '1s', target: 100 },
+    { duration: '1s', target: 500 },
     { duration: '20s', target: 1500 },
   ],
 };
 
 
-// const randPropId = () => Math.floor(Math.random() * (10000000 - 1) + 1);
+const randPropId = () => Math.floor(Math.random() * (10000000 - 1) + 1);
 
 
 export default function () {
-  const res = http.get('http://ec2-18-222-48-218.us-east-2.compute.amazonaws.com/reservations/100');
+  const res = http.get(`http://3.22.130.208:5050/reservations/${randPropId()}`);
 
   check(res, {
     'status was 200': (r) => r.status == 200,
