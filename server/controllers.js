@@ -16,16 +16,16 @@ const getAvailable = (req, res) => {
   });
 };
 
-const getReservations = (req, res) => {
-  const { restaurantId } = req.params;
-  Model.getRestaurantReservations(restaurantId, (err, reservation) => {
-    if (err) {
-      console.log(err, 'error getting these reservations');
-    } else {
-      res.send(reservation);
-    }
-  });
-};
+// const getReservations = (req, res) => {
+//   const { restaurantId } = req.params;
+//   Model.getRestaurantReservations(restaurantId, (err, reservation) => {
+//     if (err) {
+//       console.log(err, 'error getting these reservations');
+//     } else {
+//       res.send(reservation);
+//     }
+//   });
+// };
 
 const post = (req, res) => {
   // console.log('POST /reservations');
@@ -65,5 +65,5 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  getAvailable, post, update, destroy, getReservations,
+  getAvailable, post, update, destroy,
 };

@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
-const pg = require('pg');
+const { Pool } = require('pg');
 
-
-const connection = new pg.Pool({
-  host: '3.22.112.122',
+const connection = new Pool({
+  host: '18.222.151.121',
   user: 'postgres',
   database: 'reservationsdb',
   port: 5432,
@@ -17,12 +16,12 @@ const connection = new pg.Pool({
 // });
 
 
-connection.connect((err) => {
-  if (err) {
-    console.error('Connection Error', err.stack);
-  } else {
-    console.log('Connected to Postgres DB');
-  }
-});
+// connection.connect((err) => {
+//   if (err) {
+//     console.error('Connection Error', err.stack);
+//   } else {
+//     console.log('Connected to Postgres DB');
+//   }
+// });
 
 module.exports = connection;

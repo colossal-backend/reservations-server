@@ -4,3 +4,4 @@ server/db/index.js
 .env
 newrelic_agent.log
 .vscode
+.clinic
